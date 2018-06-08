@@ -1,0 +1,1 @@
+CREATE TABLE category(id bigint PRIMARY KEY, name text);
