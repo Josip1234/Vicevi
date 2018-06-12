@@ -1,5 +1,10 @@
 package com.jokes.vicevi.repositories;
 
-public interface JokesRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+import com.jokes.vicevi.entities.Jokes;
+
+public interface JokesRepository extends JpaRepository<Jokes, Integer> {
 
 }

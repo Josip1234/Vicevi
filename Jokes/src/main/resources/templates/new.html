@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Obrazac za unos viceva</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Ovdje možete unijeti nove viceve i odabrati kategorije za viceve</h1>
+    <form action="#" th:action="@{/new}" th:object="${jokes}" method="post">
+        <p>Upiši novi vic:</p><br><textarea rows="15" cols="30" th:field="*{content}"></textarea>
+        <p>Odaberi kategoriju od trenutno dostupnih:</p>
+        
+        <select th:field="*{id}">
+                         <option value=""> -- </option>
+                         <option th:each="cat : ${kategorija}"
+                            th:value="${cat.id}"
+                            th:utext="${cat.name}"/>
+                  </select>
+        
+   
+        
+        <p><input type="submit" value="Unesi novi vic" /> <input type="reset" value="Postavi na početne vrijednosti" /></p>
+    </form>
+</body>
+</html>
