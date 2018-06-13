@@ -25,17 +25,23 @@ public class JokeForm {
 		this.jokesRepo=jokesRepository;
 	}
 	 @GetMapping("/new")
-	    public String greetingForm(Model model) {
+	    public String dohvatiObrazac(Model model) {
 	        model.addAttribute("jokes", new Jokes());
+	        List<Jokes> joke=jokesRepo.findAll();
 	        List<Category> lista=categoryRepository.findAll();
 	        model.addAttribute("kategorija",lista);
+	        model.addAttribute("vicevi",joke);
+	       
 	        return "new";
 	    }
 	 @PostMapping("/new")
-	    public String greetingSubmit(@ModelAttribute Jokes jokes,@ModelAttribute Category category) {
+	    public String unesiNoviVic(@ModelAttribute Jokes jokes,@ModelAttribute Category category) {
+		     System.out.println(jokes.getId());
+		     System.out.println(category.getId());
+		     System.out.println(category.getName());
+		     System.out.println(jokes.getContent());
+		     
 		    
-		    
-		    jokesRepo.save(jokes);
 	        return "new";
 	    }
 }
