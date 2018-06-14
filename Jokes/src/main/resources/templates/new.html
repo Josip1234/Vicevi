@@ -8,15 +8,18 @@
 	<h1>Ovdje možete unijeti nove viceve i odabrati kategorije za viceve</h1>
     <form action="#" th:action="@{/new}" th:object="${jokes}" method="post">
         <p>Upiši novi vic:</p><br><textarea rows="15" cols="30" th:field="*{content}"></textarea>
+        <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Polje mora biti popunjeno!</p>
         <p>Odaberi kategoriju od trenutno dostupnih:</p>
         
         <select th:field="*{category}">
-                         <option value=""> -- </option>
+         
+                         <option value="">  </option>
+                        
                          <option th:each="cat : ${kategorija}"
                             th:value="${cat.id}"
                             th:utext="${cat.name}"/>
                   </select>
-        
+          <span th:if="${#fields.hasErrors('category')}" th:errors="*{name}">Trebate odabrati pravu kategoriju!</span>
    
         
         <p><input type="submit" value="Unesi novi vic" /> <input type="reset" value="Postavi na početne vrijednosti" /></p>

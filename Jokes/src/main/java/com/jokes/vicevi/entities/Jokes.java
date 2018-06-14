@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 
+
 @Entity
 @Table(name="jokes")
 public class Jokes {
@@ -11,6 +12,7 @@ public class Jokes {
 @GeneratedValue(strategy=GenerationType.IDENTITY)
 @Column(name="id")
 private Integer id;
+
 
 @NotBlank
 @Column(unique=true)
