@@ -65,6 +65,14 @@ public void setDislikes(int dislikes) {
 	this.dislikes = dislikes;
 }
 
+public Category getCategory() {
+	return category;
+}
+
+public void setCategory(Category category) {
+	this.category = category;
+}
+
 
 
 

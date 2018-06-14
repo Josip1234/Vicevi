@@ -40,7 +40,7 @@ public class JokeForm {
 		     System.out.println(category.getId());
 		     System.out.println(category.getName());
 		     System.out.println(jokes.getContent());
-		     
+		     jokesRepo.save(jokes);
 		    
 	        return "new";
 	    }

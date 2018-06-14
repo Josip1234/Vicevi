@@ -10,7 +10,7 @@
         <p>Upiši novi vic:</p><br><textarea rows="15" cols="30" th:field="*{content}"></textarea>
         <p>Odaberi kategoriju od trenutno dostupnih:</p>
         
-        <select th:field="*{id}">
+        <select th:field="*{category}">
                          <option value=""> -- </option>
                          <option th:each="cat : ${kategorija}"
                             th:value="${cat.id}"
