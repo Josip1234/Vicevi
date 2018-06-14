@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Početna stranica viceva</title>
+</head>
+<body>
+<div id="container">
+<div id="menu">
+<ul>
+<li><a th:href="@{/new}">Unos viceva</a></li>
+<li>
+<form th:action="@{/logout}" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> 
+    <input type="submit" value="Odjava korisnika">
+</form>
+
+</li>
+</ul>
+
+</div>
+<section id="lista">
+<h2>Lista viceva</h2>
+<table border="1" th:unless="${#lists.isEmpty(vicevi)}">
+<tr>
+<td>#</td>
+<td>Kategorija</td>
+<td>Vic</td>
+</tr>
+
+<tr th:each="vic:${vicevi}">
+<td th:text="${vic.id}">#</td>
+<td th:text="${vic.category}">Kategorija</td>
+<td th:text="${vic.content}"></td>
+</tr>
+
+
+</table>
+</section>
+</div>
+</body>
+</html>

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -34,6 +33,12 @@ public class JokeForm implements WebMvcConfigurer {
 	public JokeForm(JokesRepository jokesRepository,CategoryRepository categoryRepo) {
 		this.categoryRepository=categoryRepo;
 		this.jokesRepo=jokesRepository;
+	}
+	@GetMapping("/")
+	public String dohvatiListuViceva(Model model) {
+		List<Jokes> listaViceva=jokesRepo.findAll();
+		model.addAttribute("vicevi",listaViceva);
+		return "index";
 	}
 	 @GetMapping("/new")
 	    public String dohvatiObrazac(Model model) {
