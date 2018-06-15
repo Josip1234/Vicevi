@@ -41,9 +41,8 @@
 <td th:text="${vic.content}">Sadržaj</td>
 <td th:text="${vic.likes}"></td>
 <td th:text="${vic.dislikes}"></td>
-<td>
+<td th:text="${vic.likes}-${vic.dislikes}"></td>
 
-</td>
 <td>
 <form action="#" th:action="@{/index/{id}}"  method="get">
 <input type="submit" value="Like" th:value="1" name="like">

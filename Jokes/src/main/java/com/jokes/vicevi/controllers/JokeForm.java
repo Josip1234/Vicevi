@@ -1,6 +1,7 @@
 package com.jokes.vicevi.controllers;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.jokes.vicevi.entities.Category;
 import com.jokes.vicevi.entities.Jokes;
+
 import com.jokes.vicevi.repositories.CategoryRepository;
 import com.jokes.vicevi.repositories.JokesRepository;
 
@@ -40,8 +42,11 @@ public class JokeForm implements WebMvcConfigurer {
 	@GetMapping("/")
 	public String dohvatiListuViceva(Model model) {
 		List<Jokes> listaViceva=jokesRepo.findAll();
-		model.addAttribute("vicevi",listaViceva);
+        
+		
 	
+	    model.addAttribute("vicevi",listaViceva);
+	  
 		return "index";
 	}
 	@GetMapping("/index/{id}")
