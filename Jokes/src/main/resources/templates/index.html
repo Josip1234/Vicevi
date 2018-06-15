@@ -21,7 +21,9 @@
 </div>
 <section id="lista">
 <h2>Lista viceva</h2>
-<table border="1" th:unless="${#lists.isEmpty(vicevi)}">
+
+
+<table border="1" th:unless="${#lists.isEmpty(vicevi)}" >
 <tr>
 <td>#</td>
 <td>Kategorija</td>
@@ -40,6 +42,7 @@
 <td th:text="${vic.likes}"></td>
 <td th:text="${vic.dislikes}"></td>
 <td>
+
 </td>
 <td>
 <form action="#" th:action="@{/index/{id}}"  method="get">

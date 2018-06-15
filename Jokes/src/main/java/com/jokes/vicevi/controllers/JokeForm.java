@@ -1,5 +1,6 @@
 package com.jokes.vicevi.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -40,13 +41,21 @@ public class JokeForm implements WebMvcConfigurer {
 	public String dohvatiListuViceva(Model model) {
 		List<Jokes> listaViceva=jokesRepo.findAll();
 		model.addAttribute("vicevi",listaViceva);
+	
 		return "index";
 	}
 	@GetMapping("/index/{id}")
 	public String dohvatiLikeIDislike(@RequestParam Integer id ,@RequestParam(value="like",defaultValue="0") int like,@RequestParam(value="dislike",defaultValue="0") int dislike,Model model) {
-		System.out.println(id);
-		System.out.println(String.valueOf(like));
-		System.out.println(String.valueOf(dislike));
+		//System.out.println(id);
+		//System.out.println(String.valueOf(like));
+		//System.out.println(String.valueOf(dislike));
+		Jokes jk = new Jokes();
+		jk=jokesRepo.getOne(id);
+		//System.out.println("Stare vrijednosti:\n"+jk.getId()+" "+jk.getCategory()+" "+jk.getContent()+" "+jk.getLikes()+" "+jk.getDislikes());
+		jk.setLikes(jk.getLikes()+like);
+		jk.setDislikes(jk.getDislikes()+dislike);
+		//System.out.println("Nove vrijednosti:\n"+jk.getId()+" "+jk.getCategory()+" "+jk.getContent()+" "+jk.getLikes()+" "+jk.getDislikes());
+		jokesRepo.save(jk);
 		return "index";
 	}
 	
