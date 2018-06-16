@@ -76,6 +76,12 @@ public void setCategory(Category category) {
 }
 
 
+@Override
+public String toString(){
+	
+	return id+" "+content+" "+likes+" "+dislikes;
+	
+}
 
 
 }
