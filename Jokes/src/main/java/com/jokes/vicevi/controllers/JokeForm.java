@@ -4,6 +4,7 @@ package com.jokes.vicevi.controllers;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -45,45 +46,10 @@ public class JokeForm implements WebMvcConfigurer {
 	@GetMapping("/")
 	public String dohvatiListuViceva(Model model) {
 		List<Jokes> listaViceva=jokesRepo.findAll();
-		List<Jokes> sortiranaLista=new ArrayList<Jokes>();
-	    int razlika1=0;
-	    int razlika2=0;
-        int maksimalnaVrijednost=0;	 
-        Jokes jokes=new Jokes();
-	    for (int i = 0; i < listaViceva.size(); i++) {
-	    	
-			razlika1=Math.abs(listaViceva.get(i).getLikes()-listaViceva.get(i).getDislikes());
-			System.out.println(razlika1);
-			for (int j = 1; j < listaViceva.size(); j++) {
-				razlika2=Math.abs(listaViceva.get(j).getLikes()-listaViceva.get(j).getDislikes());
-				if(razlika1>razlika2) {
-					maksimalnaVrijednost=razlika1;
-					jokes=new Jokes();
-					jokes.setId(listaViceva.get(i).getId());
-					jokes.setCategory(listaViceva.get(i).getCategory());
-					jokes.setContent(listaViceva.get(i).getContent());
-					jokes.setLikes(listaViceva.get(i).getLikes());
-					jokes.setDislikes(listaViceva.get(i).getDislikes());
-					sortiranaLista.add(jokes);
-				}else if(razlika1<razlika2) {
-					maksimalnaVrijednost=razlika2;
-					jokes=new Jokes();
-					jokes.setId(listaViceva.get(j).getId());
-					jokes.setCategory(listaViceva.get(j).getCategory());
-					jokes.setContent(listaViceva.get(j).getContent());
-					jokes.setLikes(listaViceva.get(j).getLikes());
-					jokes.setDislikes(listaViceva.get(j).getDislikes());
-					sortiranaLista.add(jokes);
-				}
-				
-			}
-			System.out.println("Trenutna maksimalna vrijednost:" +String.valueOf(maksimalnaVrijednost));
-			
-			
-		}
-	    
-	
-	    listaViceva=sortiranaLista;
+		
+		
+	   
+	    Collections.sort(listaViceva,Jokes.sortirajPoRazlici);
       
 	    
 	    model.addAttribute("vicevi",listaViceva);

@@ -1,7 +1,11 @@
 package com.jokes.vicevi.entities;
 
+import java.util.Comparator;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+
+import com.jokes.vicevi.ObjectComparator.Employee;
 
 
 
@@ -74,6 +78,17 @@ public Category getCategory() {
 public void setCategory(Category category) {
 	this.category = category;
 }
+
+public static Comparator<Jokes> sortirajPoRazlici = new Comparator<Jokes>()
+{
+	 @Override
+	 public int compare(Jokes joke1, Jokes joke2)
+	 {
+		 Integer razlika1=Math.abs(joke1.getLikes()-joke1.getDislikes());
+		 Integer razlika2=Math.abs(joke2.getLikes()-joke2.getDislikes());
+		 return razlika2.compareTo(razlika1);
+	 }
+};
 
 
 @Override
