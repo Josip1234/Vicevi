@@ -3,13 +3,16 @@ package com.jokes.vicevi.controllers;
 
 
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,7 +24,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.jokes.vicevi.entities.Category;
 import com.jokes.vicevi.entities.Jokes;
-
 import com.jokes.vicevi.repositories.CategoryRepository;
 import com.jokes.vicevi.repositories.JokesRepository;
 
@@ -31,7 +33,7 @@ import com.jokes.vicevi.repositories.JokesRepository;
 public class JokeForm implements WebMvcConfigurer {
 	
 	private CategoryRepository categoryRepository;
-	private JokesRepository jokesRepo;
+	private  JokesRepository jokesRepo;
 	
 	 @Override
 	    public void addViewControllers(ViewControllerRegistry registry) {
@@ -43,16 +45,47 @@ public class JokeForm implements WebMvcConfigurer {
 		this.categoryRepository=categoryRepo;
 		this.jokesRepo=jokesRepository;
 	}
-	@GetMapping("/")
-	public String dohvatiListuViceva(Model model) {
-		List<Jokes> listaViceva=jokesRepo.findAll();
+	
+	
+	
+	/*@GetMapping("/")
+    public String dohvatiListuViceva(Model model) {
+		List<Jokes> listaViceva= jokesRepo.findAll();
 		
 		
 	   
 	    Collections.sort(listaViceva,Jokes.sortirajPoRazlici);
-      
-	    
+       
 	    model.addAttribute("vicevi",listaViceva);
+	  
+		return "index";
+	}
+	@GetMapping("/index")
+    public String ograničiListuViceva(Pageable pageable,Model model) {
+		Page<Jokes> listaViceva=jokesRepo.findAll(pageable);
+		pageable=PageRequest.of(0, 3);
+		
+	   
+	   
+       
+	    model.addAttribute("vicevi",listaViceva);
+	  
+		return "index";
+	}*/
+	@GetMapping("/")
+    public String ograničiListuViceva(Model model) {
+		
+			Pageable pageable=PageRequest.of(0, 10);
+			Page<Jokes> listaViceva=jokesRepo.findAll(pageable);
+			model.addAttribute("vicevi",listaViceva);
+		
+		
+		
+		
+	   
+	   
+       
+	  
 	  
 		return "index";
 	}
