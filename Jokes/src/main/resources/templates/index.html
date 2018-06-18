@@ -9,6 +9,8 @@
 <div id="menu">
 <ul>
 <li><a th:href="@{/new}">Unos viceva</a></li>
+<li><a th:href="${sljedeca}">Sljedeća stranica</a></li>
+<li><a th:href="${prethodna}">Prethodna stranica</a></li>
 <li>
 <form th:action="@{/logout}" method="post">
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> 

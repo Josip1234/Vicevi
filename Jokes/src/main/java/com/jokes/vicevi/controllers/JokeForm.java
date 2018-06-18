@@ -3,6 +3,7 @@ package com.jokes.vicevi.controllers;
 
 
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,9 +11,10 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.querydsl.QPageRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -77,7 +79,17 @@ public class JokeForm implements WebMvcConfigurer {
 		
 			Pageable pageable=PageRequest.of(0, 10);
 			Page<Jokes> listaViceva=jokesRepo.findAll(pageable);
+			
+			List<Jokes> lista=new ArrayList<Jokes>();  
+			for (Jokes jokes : listaViceva) {
+				lista.add(new Jokes(jokes.getId(), jokes.getContent(), jokes.getCategory(), jokes.getLikes(), jokes.getDislikes()));
+			}
+			
+		    Collections.sort(lista,Jokes.sortirajPoRazlici);
+		    listaViceva=new PageImpl<>(lista);
 			model.addAttribute("vicevi",listaViceva);
+			model.addAttribute("sljedeca",listaViceva.nextPageable());
+			model.addAttribute("prethodna",listaViceva.previousPageable());
 		
 		
 		
@@ -89,6 +101,8 @@ public class JokeForm implements WebMvcConfigurer {
 	  
 		return "index";
 	}
+	
+
 	@GetMapping("/index/{id}")
 	public String dohvatiLikeIDislike(@RequestParam Integer id ,@RequestParam(value="like",defaultValue="0") int like,@RequestParam(value="dislike",defaultValue="0") int dislike,Model model) {
 		//System.out.println(id);
