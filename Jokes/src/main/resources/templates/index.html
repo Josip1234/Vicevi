@@ -9,8 +9,7 @@
 <div id="menu">
 <ul>
 <li><a th:href="@{/new}">Unos viceva</a></li>
-<li><a th:href="${sljedeca}">Sljedeća stranica</a></li>
-<li><a th:href="${prethodna}">Prethodna stranica</a></li>
+
 <li>
 <form th:action="@{/logout}" method="post">
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> 
@@ -64,7 +63,17 @@
 
 
 </table>
-</section>
+<div id="linkovi">
+
+   <a th:href="@{/(page=${vicevi.number-1},size=${vicevi.size})}">Prethodni</a>
+  
+   
+   <a th:href="@{/(page=${vicevi.number+1},size=${vicevi.size})}">Sljedeći</a>
+  
 </div>
+</section>
+
+</div>
+
 </body>
 </html>

@@ -3,7 +3,7 @@ package com.jokes.vicevi;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.lang.Object;
+
 
 public class ObjectComparator
 {

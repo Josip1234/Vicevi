@@ -12,9 +12,9 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -66,7 +66,7 @@ public class JokeForm implements WebMvcConfigurer {
     public String ograničiListuViceva(Pageable pageable,Model model) {
 		Page<Jokes> listaViceva=jokesRepo.findAll(pageable);
 		pageable=PageRequest.of(0, 3);
-		
+		import org.springframework.data.domain.PageRequest;
 	   
 	   
        
@@ -75,9 +75,9 @@ public class JokeForm implements WebMvcConfigurer {
 		return "index";
 	}*/
 	@GetMapping("/")
-    public String ograničiListuViceva(Model model) {
+    public String ograničiListuViceva(@PageableDefault(size=10) Pageable pageable,Model model) {
 		
-			Pageable pageable=PageRequest.of(0, 10);
+			/*Pageable pageable=PageRequest.of(0, 10);*/
 			Page<Jokes> listaViceva=jokesRepo.findAll(pageable);
 			
 			List<Jokes> lista=new ArrayList<Jokes>();  
@@ -88,8 +88,7 @@ public class JokeForm implements WebMvcConfigurer {
 		    Collections.sort(lista,Jokes.sortirajPoRazlici);
 		    listaViceva=new PageImpl<>(lista);
 			model.addAttribute("vicevi",listaViceva);
-			model.addAttribute("sljedeca",listaViceva.nextPageable());
-			model.addAttribute("prethodna",listaViceva.previousPageable());
+			
 		
 		
 		
