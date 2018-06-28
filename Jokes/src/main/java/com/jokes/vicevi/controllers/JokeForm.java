@@ -114,7 +114,7 @@ public class JokeForm implements WebMvcConfigurer {
 		jk.setDislikes(jk.getDislikes()+dislike);
 		//System.out.println("Nove vrijednosti:\n"+jk.getId()+" "+jk.getCategory()+" "+jk.getContent()+" "+jk.getLikes()+" "+jk.getDislikes());
 		jokesRepo.save(jk);
-		return "index";
+		return "redirect:/";
 	}
 	
 	 @GetMapping("/new")
@@ -139,6 +139,29 @@ public class JokeForm implements WebMvcConfigurer {
 		     jokesRepo.save(jokes);
 	        return "redirect:/";
 	    }
+	 @GetMapping("/newcategory")
+	    public String dohvatiObrazacZaNovuKategoriju(Model model) {
+	        model.addAttribute("category", new Category());
+	        
+	        List<Category> lista=categoryRepository.findAll();
+	        model.addAttribute("kategorija",lista);
+	        
+	       
+	        return "newcategory";
+	    }
+	 @PostMapping("/newcategory")
+	    public String unesiNovuKategoriju(@Valid Category category,BindingResult bindingResult) {
+		    /* System.out.println(jokes.getId());
+		     System.out.println(category.getId());
+		     System.out.println(category.getName());
+		     System.out.println(jokes.getContent());*/
+		     if(bindingResult.hasErrors()) {
+		    	 return "newcategory";
+		     }
+		     categoryRepository.save(category);
+	        return "redirect:/";
+	    }
+	 
 	 
 	 
 

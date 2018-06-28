@@ -26,6 +26,7 @@ protected void configure(HttpSecurity http) throws Exception{
 	http.formLogin().and().logout().logoutSuccessUrl("/").and()
 	.authorizeRequests()
 	 .antMatchers("/new").hasRole("JOCKER")
+	 .antMatchers("/newcategory").hasRole("JOCKER")
 	 .anyRequest().permitAll();
 	 
 	
