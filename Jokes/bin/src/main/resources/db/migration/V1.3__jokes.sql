@@ -1,0 +1,1 @@
+CREATE TABLE jokes(id serial PRIMARY KEY, content text, likes integer,dislikes integer,category_id integer);

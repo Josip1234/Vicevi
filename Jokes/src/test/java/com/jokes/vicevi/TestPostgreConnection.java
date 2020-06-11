@@ -30,8 +30,8 @@ public class TestPostgreConnection {
 		try {
 
 			connection = DriverManager.getConnection(
-					"jdbc:postgresql://127.0.0.1:5432/data", "Josip",
-					"123456");
+					"jdbc:postgresql://127.0.0.1:5433/data", "postgres",
+					"mypassword");
 
 		} catch (SQLException e) {
 

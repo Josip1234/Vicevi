@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Obrazac za dodavanje nove kategorije</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Ovdje možete unijeti nove kategorije</h1>
+    <form action="#" th:action="@{/newcategory}" th:object="${category}" method="post">
+        <h2>Unesi novu kategoriju:</h2>
+        <input type="text" name="name" th:field="*{name}">
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Polje mora biti popunjeno!</p>
+        <p><input type="submit" value="Unesi novu kategoriju" /> <input type="reset" value="Postavi na početne vrijednosti" /></p>
+    </form>
+    <br>
+  <form th:action="@{/logout}" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> 
+    <input type="submit" value="Odjava korisnika">
+</form>
+</body>
+</html>

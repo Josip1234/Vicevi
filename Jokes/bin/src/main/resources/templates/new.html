@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Obrazac za unos viceva</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<section>
+<h2>Link za unos nove kategorije</h2>
+<ul>
+<li><a th:href="@{/newcategory}">Unos nove kategorije</a></li>
+
+<li>
+</section>
+	<h1>Ovdje možete unijeti nove viceve i odabrati kategorije za viceve</h1>
+	
+    <form action="#" th:action="@{/new}" th:object="${jokes}" method="post">
+        <p>Upiši novi vic:</p><br><textarea rows="15" cols="30" th:field="*{content}"></textarea>
+        <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Polje mora biti popunjeno!</p>
+        <p>Odaberi kategoriju od trenutno dostupnih:</p>
+        
+        <select th:field="*{category}">
+         
+                         <option value="">  </option>
+                        
+                         <option th:each="cat : ${kategorija}"
+                            th:value="${cat.id}"
+                            th:utext="${cat.name}"/>
+                  </select>
+          <span th:if="${#fields.hasErrors('category')}" th:errors="*{name}">Trebate odabrati pravu kategoriju!</span>
+   
+        
+        <p><input type="submit" value="Unesi novi vic" /> <input type="reset" value="Postavi na početne vrijednosti" /></p>
+    </form>
+    <br>
+  <form th:action="@{/logout}" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> 
+    <input type="submit" value="Odjava korisnika">
+</form>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Početna stranica viceva</title>
+</head>
+<body>
+<div id="container">
+<div id="menu">
+<ul>
+<li><a th:href="@{/new}">Unos viceva</a></li>
+
+<li>
+<form th:action="@{/logout}" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> 
+    <input type="submit" value="Odjava korisnika">
+</form>
+
+</li>
+</ul>
+
+</div>
+<section id="lista">
+<h2>Lista viceva</h2>
+
+
+<table border="1" th:unless="${#lists.isEmpty(vicevi)}" >
+<tr>
+<td>#</td>
+<td>Kategorija</td>
+<td>Vic</td>
+<td>Likes</td>
+<td>Dislikes</td>
+<td>Razlika</td>
+<td>Lajkaj šalu</td>
+<td>Dislajkaj šalu</td>
+</tr>
+
+<tr th:each="vic:${vicevi}">
+<td th:text="${vic.id}">#</td>
+<td th:text="${vic.category}">Kategorija</td>
+<td th:text="${vic.content}">Sadržaj</td>
+<td th:text="${vic.likes}"></td>
+<td th:text="${vic.dislikes}"></td>
+<td th:text="${vic.likes}-${vic.dislikes}"></td>
+
+<td>
+<form action="#" th:action="@{/index/{id}}"  method="get">
+<input type="submit" value="Like" th:value="1" name="like">
+<input type="hidden" name="id" th:value="${vic.id}"/>
+</form>
+<td>
+<form action="#" th:action="@{/index/{id}}"  method="get">
+<input type="submit" value="dislike" th:value="1" name="dislike">
+<input type="hidden" name="id" th:value="${vic.id}"/>
+</form>
+
+</td>
+
+
+
+</tr>
+
+
+</table>
+<div id="linkovi">
+
+   <a th:href="@{/(page=${vicevi.number-1},size=${vicevi.size})}">Prethodni</a>
+  
+   
+   <a th:href="@{/(page=${vicevi.number+1},size=${vicevi.size})}">Sljedeći</a>
+  
+</div>
+</section>
+
+</div>
+
+</body>
+</html>
