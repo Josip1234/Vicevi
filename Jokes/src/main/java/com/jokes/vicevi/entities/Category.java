@@ -11,8 +11,8 @@ import javax.validation.constraints.NotBlank;
 public class Category {
 	
 @Id
-@Column(name="id")
 @GeneratedValue(strategy=GenerationType.IDENTITY)
+@Column(name="id")
 private Integer id;
 
 @NotBlank
