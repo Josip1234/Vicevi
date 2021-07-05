@@ -129,13 +129,14 @@ public class JokeForm implements WebMvcConfigurer {
 	    }
 	 @PostMapping("/new")
 	    public String unesiNoviVic(@Valid  Jokes jokes,@Valid Category category,BindingResult bindingResult) {
-		    /* System.out.println(jokes.getId());
+		    /*System.out.println(jokes.getId());
 		     System.out.println(category.getId());
 		     System.out.println(category.getName());
 		     System.out.println(jokes.getContent());*/
 		     if(bindingResult.hasErrors()) {
 		    	 return "new";
 		     }
+		
 		     jokesRepo.save(jokes);
 	        return "redirect:/";
 	    }

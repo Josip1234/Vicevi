@@ -15,7 +15,7 @@ public class Jokes {
 @Id
 @GeneratedValue(strategy=GenerationType.IDENTITY)
 @Column(name="id")
-private Long id;
+private Integer id;
 
 
 @NotBlank
@@ -30,7 +30,7 @@ private int dislikes;
 
 public Jokes() {}
 
-public Jokes(Long id,String content, Category category, int likes, int dislikes) {
+public Jokes(Integer id,String content, Category category, int likes, int dislikes) {
 	
     this.id=id;
 	this.content = content;
@@ -39,11 +39,11 @@ public Jokes(Long id,String content, Category category, int likes, int dislikes)
 	this.dislikes = dislikes;
 }
 
-public Long getId() {
+public Integer getId() {
 	return id;
 }
 
-public void setId(Long id) {
+public void setId(Integer id) {
 	this.id = id;
 }
 
