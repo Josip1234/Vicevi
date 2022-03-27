@@ -1,1 +1,1 @@
-CREATE TABLE category(id serial PRIMARY KEY, name text);
+CREATE TABLE category(id int PRIMARY KEY AUTO_INCREMENT, name VARCHAR(255));
