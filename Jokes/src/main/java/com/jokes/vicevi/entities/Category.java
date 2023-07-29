@@ -15,6 +15,7 @@ public class Category {
 @Column(name="id")
 private Integer id;
 
+
 @NotBlank
 @Column(unique=true)
 private String name;
